@@ -1,0 +1,14 @@
+clarkwinkelmann-manual-discussion-slug:
+    forum:
+        controls:
+            edit: Edit Slug
+        modal:
+            title: Edit Discussion Slug
+            automatic: Automatic
+            manual: Manual
+            submit: Save
+            cancel: Cancel
+
+    admin:
+        permissions:
+            edit: Edit Discussion Slug

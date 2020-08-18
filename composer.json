@@ -1,0 +1,34 @@
+{
+    "name": "clarkwinkelmann/flarum-ext-manual-discussion-slug",
+    "description": "Manually define the slug of an individual discussion",
+    "keywords": [
+        "flarum"
+    ],
+    "type": "flarum-extension",
+    "license": "MIT",
+    "require": {
+        "flarum/core": ">=0.1.0-beta.13 <0.1.0-beta.14"
+    },
+    "authors": [
+        {
+            "name": "Clark Winkelmann",
+            "email": "clark.winkelmann@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "ClarkWinkelmann\\ManualDiscussionSlug\\": "src/"
+        }
+    },
+    "extra": {
+        "flarum-extension": {
+            "title": "Manual Discussion Slug",
+            "icon": {
+                "name": "fas fa-i-cursor",
+                "backgroundColor": "#684ba6",
+                "color": "#fff"
+            }
+        }
+    }
+}
