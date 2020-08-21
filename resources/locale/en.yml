@@ -6,6 +6,7 @@ clarkwinkelmann-manual-discussion-slug:
             title: Edit Discussion Slug
             automatic: Automatic
             manual: Manual
+            autoFormat: Auto-format to lowercase and dashes
             submit: Save
             cancel: Cancel
 

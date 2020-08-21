@@ -1,6 +1,7 @@
 import app from 'flarum/app';
 import Modal from 'flarum/components/Modal';
 import Button from 'flarum/components/Button';
+import Switch from 'flarum/components/Switch';
 
 /* global m */
 
@@ -13,7 +14,8 @@ export default class EditSlugModal extends Modal {
         const manualSlug = discussion.attribute('manualSlug');
 
         this.automatic = manualSlug === null;
-        this.slug = manualSlug === null ? discussion.slug() : manualSlug;
+        this.slug = this.automatic ? discussion.slug() : manualSlug;
+        this.autoFormat = this.automatic || /^[a-z0-9_-]+$/.test(this.slug);
         this.dirty = false;
         this.loading = false;
     }
@@ -65,12 +67,26 @@ export default class EditSlugModal extends Modal {
                     type: 'text',
                     maxlength: 255,
                     value: this.slug,
-                    onchange: event => {
-                        this.slug = event.target.value;
+                    oninput: event => {
+                        this.slug = this.autoFormat ? this.autoFormatValue(event.target.value) : event.target.value;
                         this.dirty = true;
                     },
                     disabled: this.automatic || this.loading,
                 }),
+            ]),
+            m('.Form-group', [
+                Switch.component({
+                    state: this.autoFormat,
+                    onchange: value => {
+                        this.autoFormat = value;
+
+                        if (this.autoFormat && this.slug) {
+                            this.slug = this.autoFormatValue(this.slug);
+                            this.dirty = true;
+                        }
+                    },
+                    disabled: this.automatic || this.loading,
+                }, app.translator.trans('clarkwinkelmann-manual-discussion-slug.forum.modal.autoFormat')),
             ]),
             m('.Form-group', [
                 Button.component({
@@ -89,6 +105,10 @@ export default class EditSlugModal extends Modal {
                 }),
             ]),
         ]);
+    }
+
+    autoFormatValue(slug) {
+        return slug.toLowerCase().replace(/\W+/g, '-');
     }
 
     onsubmit(e) {
