@@ -18,7 +18,8 @@
         }
     ],
     "support": {
-        "source": "https://github.com/clarkwinkelmann/flarum-ext-follow-tags-prompt"
+        "source": "https://github.com/clarkwinkelmann/flarum-ext-follow-tags-prompt",
+        "forum": "https://discuss.flarum.org/d/25993"
     },
     "autoload": {
         "psr-4": {
@@ -34,6 +35,9 @@
                 "backgroundColor": "#684ba6",
                 "color": "#fff"
             }
+        },
+        "flagrow": {
+            "discuss": "https://discuss.flarum.org/d/25993"
         }
     }
 }

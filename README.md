@@ -23,7 +23,10 @@ You can [contact me](https://clarkwinkelmann.com/flarum) to sponsor additional f
 
 Support is offered on a "best effort" basis through the Flarum community thread.
 
+**Sponsors**: [Daniel Alter](https://convo.co.il/)
+
 ## Links
 
 - [GitHub](https://github.com/clarkwinkelmann/flarum-ext-manual-discussion-slug)
 - [Packagist](https://packagist.org/packages/clarkwinkelmann/flarum-ext-manual-discussion-slug)
+- [Discuss](https://discuss.flarum.org/d/25993)
