@@ -1,30 +1,19 @@
 <?php
 
-namespace ClarkWinkelmann\ManualDiscussionSlug\Extenders;
+namespace ClarkWinkelmann\ManualDiscussionSlug\Listeners;
 
 use ClarkWinkelmann\ManualDiscussionSlug\Validators\SlugValidator;
 use Flarum\Discussion\Event\Saving;
-use Flarum\Extend\ExtenderInterface;
-use Flarum\Extension\Extension;
-use Flarum\User\AssertPermissionTrait;
-use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
-class SaveDiscussion implements ExtenderInterface
+class SaveDiscussion
 {
-    use AssertPermissionTrait;
-
-    public function extend(Container $container, Extension $extension = null)
-    {
-        $container['events']->listen(Saving::class, [$this, 'saving']);
-    }
-
-    public function saving(Saving $event)
+    public function handle(Saving $event)
     {
         // Can't use isset($data['attributes']['manualSlug']) as it ignores null values
         if (Arr::exists($event->data, 'attributes') && Arr::exists($event->data['attributes'], 'manualSlug')) {
-            $this->assertCan($event->actor, 'clarkwinkelmann-manual-discussion-slug.edit');
+            $event->actor->assertCan('clarkwinkelmann-manual-discussion-slug.edit');
 
             /**
              * @var $validator SlugValidator

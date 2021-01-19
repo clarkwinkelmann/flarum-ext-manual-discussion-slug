@@ -6,10 +6,10 @@ import Switch from 'flarum/components/Switch';
 /* global m */
 
 export default class EditSlugModal extends Modal {
-    constructor(discussion) {
-        super();
+    oninit(vnode) {
+        super.oninit(vnode);
 
-        this.discussion = discussion;
+        const {discussion} = this.attrs;
 
         const manualSlug = discussion.attribute('manualSlug');
 
@@ -94,15 +94,13 @@ export default class EditSlugModal extends Modal {
                     loading: this.loading,
                     type: 'submit',
                     className: 'Button Button--primary',
-                    children: app.translator.trans('clarkwinkelmann-manual-discussion-slug.forum.modal.submit'),
-                }),
+                }, app.translator.trans('clarkwinkelmann-manual-discussion-slug.forum.modal.submit')),
                 Button.component({
                     className: 'Button CancelButton',
-                    children: app.translator.trans('clarkwinkelmann-manual-discussion-slug.forum.modal.cancel'),
                     onclick() {
                         app.modal.close();
                     },
-                }),
+                }, app.translator.trans('clarkwinkelmann-manual-discussion-slug.forum.modal.cancel')),
             ]),
         ]);
     }
@@ -116,7 +114,7 @@ export default class EditSlugModal extends Modal {
 
         this.loading = true;
 
-        this.discussion.save({
+        this.attrs.discussion.save({
             manualSlug: this.automatic ? null : this.slug,
         }).then(() => {
             this.loading = false;

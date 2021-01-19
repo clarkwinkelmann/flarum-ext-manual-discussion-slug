@@ -12,10 +12,11 @@ app.initializers.add('clarkwinkelmann/manual-discussion-slug', () => {
 
         items.add('clarkwinkelmann-manual-discussion-slug', Button.component({
             icon: 'fas fa-i-cursor',
-            children: app.translator.trans('clarkwinkelmann-manual-discussion-slug.forum.controls.edit'),
             onclick() {
-                app.modal.show(new EditSlugModal(discussion));
+                app.modal.show(EditSlugModal, {
+                    discussion,
+                });
             },
-        }));
+        }, app.translator.trans('clarkwinkelmann-manual-discussion-slug.forum.controls.edit')));
     });
 });
