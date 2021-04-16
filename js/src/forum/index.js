@@ -1,8 +1,9 @@
-import {extend} from 'flarum/extend';
-import app from 'flarum/app';
-import DiscussionControls from 'flarum/utils/DiscussionControls';
-import Button from 'flarum/components/Button';
+import {extend} from 'flarum/common/extend';
+import DiscussionControls from 'flarum/forum/utils/DiscussionControls';
+import Button from 'flarum/common/components/Button';
 import EditSlugModal from './components/EditSlugModal';
+
+/* global app */
 
 app.initializers.add('clarkwinkelmann/manual-discussion-slug', () => {
     extend(DiscussionControls, 'moderationControls', (items, discussion) => {

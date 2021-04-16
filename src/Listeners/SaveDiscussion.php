@@ -9,17 +9,20 @@ use Illuminate\Support\Str;
 
 class SaveDiscussion
 {
+    protected $validator;
+
+    public function __construct(SlugValidator $validator)
+    {
+        $this->validator = $validator;
+    }
+
     public function handle(Saving $event)
     {
         // Can't use isset($data['attributes']['manualSlug']) as it ignores null values
         if (Arr::exists($event->data, 'attributes') && Arr::exists($event->data['attributes'], 'manualSlug')) {
             $event->actor->assertCan('clarkwinkelmann-manual-discussion-slug.edit');
 
-            /**
-             * @var $validator SlugValidator
-             */
-            $validator = app(SlugValidator::class);
-            $validator->assertValid([
+            $this->validator->assertValid([
                 'slug' => $event->data['attributes']['manualSlug'],
             ]);
 

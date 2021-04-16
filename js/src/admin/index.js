@@ -1,4 +1,4 @@
-import app from 'flarum/app';
+/* global app */
 
 app.initializers.add('clarkwinkelmann-manual-discussion-slug', () => {
     app.extensionData

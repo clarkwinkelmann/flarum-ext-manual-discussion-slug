@@ -1,9 +1,8 @@
-import app from 'flarum/app';
-import Modal from 'flarum/components/Modal';
-import Button from 'flarum/components/Button';
-import Switch from 'flarum/components/Switch';
+import Modal from 'flarum/common/components/Modal';
+import Button from 'flarum/common/components/Button';
+import Switch from 'flarum/common/components/Switch';
 
-/* global m */
+/* global app, m */
 
 export default class EditSlugModal extends Modal {
     oninit(vnode) {
@@ -13,8 +12,11 @@ export default class EditSlugModal extends Modal {
 
         const manualSlug = discussion.attribute('manualSlug');
 
+        // There's no way to access just the slug alone, so we need to parse the full driver-generated slug
+        const originalSlugWithId = /^[0-9]+(?:-(.+))?$/.exec(discussion.slug());
+
         this.automatic = manualSlug === null;
-        this.slug = this.automatic ? discussion.slug() : manualSlug;
+        this.slug = this.automatic ? (originalSlugWithId.length > 1 ? originalSlugWithId[1] : '') : manualSlug;
         this.autoFormat = this.automatic || /^[a-z0-9_-]+$/.test(this.slug);
         this.dirty = false;
         this.loading = false;
